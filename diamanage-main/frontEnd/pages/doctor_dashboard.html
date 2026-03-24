@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body class="doctor-page">
+  <header class="header">
+    <a class="brand" href="index.html" aria-label="Diamanage home">
+      <img src="../assets/logo.png" alt="Diamanage logo" class="brand-logo" />
+    </a>
+
+    <div class="nav-actions">
+      <a class="btn" href="#" title="Help">Help</a>
+      <a class="icon-btn" href="#" title="Profile / Settings" aria-label="Profile / Settings">👤</a>
+      <a class="btn primary" href="login.html" title="Log out" id="logoutBtn">Log out</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <aside class="card">
+      <h2 class="card-title">Your Patients</h2>
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search patients..."
+        aria-label="Search patients"
+      />
+
+      <div class="add-patient">
+        <button class="btn primary" id="toggleAddPatientBtn" type="button">
+          + Add Patient
+        </button>
+
+        <div id="addPatientForm" class="add-patient-form" style="display:none; margin-top:10px;">
+          <label for="patientEmailInput" style="display:block; font-weight:800; margin-bottom:6px;">
+            Patient Email
+          </label>
+
+          <input
+            class="search"
+            id="patientEmailInput"
+            type="email"
+            placeholder="Enter patient email"
+          />
+
+          <div class="inline">
+            <button class="btn primary" id="savePatientBtn" type="button">
+              Link Patient
+            </button>
+
+            <button class="btn" id="cancelPatientBtn" type="button">
+              Cancel
+            </button>
+          </div>
+
+          <p id="addPatientMessage" class="muted"></p>
+        </div>
+      </div>
+
+      <ul class="patient-list" id="patientList"></ul>
+
+      <p class="muted" style="margin:10px 0 0; font-size:0.9rem;">
+        Patients linked to your account.
+      </p>
+    </aside>
+
+    <section class="card" id="detailCard">
+      <div class="topline">
+        <div class="hello">
+          <h1 id="doctorGreeting">Hi Doctor.</h1>
+          <p>Select a patient to view their records.</p>
+        </div>
+      </div>
+
+      <div id="emptyState" class="empty">
+        <strong>No patient selected.</strong>
+        <div style="margin-top:6px;">
+          Click a patient on the left to view glucose, blood pressure, and heart rate records.
+        </div>
+      </div>
+
+      <div id="patientPanel" style="display:none;">
+        <div class="topline">
+          <div class="hello">
+            <h1 id="patientName">Patient</h1>
+            <p class="muted" id="patientMeta">Health overview</p>
+          </div>
+        </div>
+
+        <!-- summary cards -->
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-label">Latest Glucose</div>
+            <div class="summary-value" id="latestGlucose">--</div>
+            <div class="summary-sub" id="latestGlucoseTime">No data yet</div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-label">Latest Blood Pressure</div>
+            <div class="summary-value" id="latestBp">-- / --</div>
+            <div class="summary-sub" id="latestBpTime">No data yet</div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-label">Latest Heart Rate</div>
+            <div class="summary-value" id="latestHeartRate">--</div>
+            <div class="summary-sub" id="latestHeartRateTime">No data yet</div>
+          </div>
+        </div>
+        
+        <!--add patient tasks and view their current tasks-->
+        <div class="section" style="margin-top:16px;" id="doctorTaskSection">
+          <div class="metric-header">
+            <div>
+              <h3 style="margin-bottom:4px;">Patient Tasks</h3>
+              <p class="muted" style="margin:0;">Add a task for this patient and choose whether it is mandatory or optional.</p>
+            </div>
+            <button class="btn" type="button" id="toggleTaskFormBtn">+ Add Task</button>
+          </div>
+
+          <div id="addTaskForm" class="add-patient-form" style="display:none; margin-top:14px;">
+            <label for="taskDescriptionInput" style="display:block; font-weight:800; margin-bottom:6px;">
+              Task Description
+            </label>
+            <input
+              class="search"
+              id="taskDescriptionInput"
+              type="text"
+              placeholder="Enter task description"
+            />
+
+            <label for="taskMandatorySelect" style="display:block; font-weight:800; margin:12px 0 6px;">
+              Task Type
+            </label>
+            <select id="taskMandatorySelect" class="search">
+              <option value="true">Mandatory</option>
+              <option value="false">Optional</option>
+            </select>
+
+            <div class="inline" style="margin-top:12px;">
+              <button class="btn primary" id="saveTaskBtn" type="button">Save Task</button>
+              <button class="btn" id="cancelTaskBtn" type="button">Cancel</button>
+            </div>
+
+            <p id="taskFormMessage" class="muted" style="margin-top:10px;"></p>
+          </div>
+
+          <div id="doctorTasksEmpty" class="empty" style="display:none; margin-top:12px;">
+            No tasks found for this patient.
+          </div>
+
+          <div id="doctorTasksList" style="display:grid; gap:10px; margin-top:14px;"></div>
+        </div>
+
+        <div class="metrics-stack">
+          <!-- glucose -->
+          <div class="section">
+            <div class="metric-header">
+              <div>
+                <h3 style="margin-bottom:4px;">Glucose records</h3>
+                <p class="muted" style="margin:0;">Recent glucose readings for this patient.</p>
+              </div>
+              <div class="inline">
+                <button class="btn" type="button" id="showGlucoseChartBtn">Chart view</button>
+                <button class="btn" type="button" id="showGlucoseTableBtn">Table view</button>
+              </div>
+            </div>
+
+            <div id="glucoseEmpty" class="empty" style="display:none; margin-top:12px;">
+              No glucose records found for this patient.
+            </div>
+
+            <div id="glucoseChartWrap" class="chart-wrap" style="margin-top:14px; display:none;">
+              <canvas id="glucoseChart"></canvas>
+            </div>
+
+            <div id="glucoseTableWrap" style="overflow-x:auto; margin-top:14px; display:none;">
+              <table class="metric-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Glucose</th>
+                  </tr>
+                </thead>
+                <tbody id="glucoseTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- blood pressure -->
+          <div class="section">
+            <div class="metric-header">
+              <div>
+                <h3 style="margin-bottom:4px;">Blood pressure</h3>
+                <p class="muted" style="margin:0;">Systolic and diastolic trends over time.</p>
+              </div>
+              <div class="inline">
+                <button class="btn" type="button" id="showBpChartBtn">Chart view</button>
+                <button class="btn" type="button" id="showBpTableBtn">Table view</button>
+              </div>
+            </div>
+
+            <div id="bpEmpty" class="empty" style="display:none; margin-top:12px;">
+              No blood pressure records found for this patient.
+            </div>
+
+            <div id="bpChartWrap" class="chart-wrap" style="margin-top:14px; display:none;">
+              <canvas id="bpChart"></canvas>
+            </div>
+
+            <div id="bpTableWrap" style="overflow-x:auto; margin-top:14px; display:none;">
+              <table class="metric-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Systolic</th>
+                    <th>Diastolic</th>
+                  </tr>
+                </thead>
+                <tbody id="bpTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- heart rate -->
+          <div class="section">
+            <div class="metric-header">
+              <div>
+                <h3 style="margin-bottom:4px;">Heart rate</h3>
+                <p class="muted" style="margin:0;">Heart rate readings over time.</p>
+              </div>
+              <div class="inline">
+                <button class="btn" type="button" id="showHrChartBtn">Chart view</button>
+                <button class="btn" type="button" id="showHrTableBtn">Table view</button>
+              </div>
+            </div>
+
+            <div id="hrEmpty" class="empty" style="display:none; margin-top:12px;">
+              No heart rate records found for this patient.
+            </div>
+
+            <div id="hrChartWrap" class="chart-wrap" style="margin-top:14px; display:none;">
+              <canvas id="hrChart"></canvas>
+            </div>
+
+            <div id="hrTableWrap" style="overflow-x:auto; margin-top:14px; display:none;">
+              <table class="metric-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Heart Rate</th>
+                  </tr>
+                </thead>
+                <tbody id="hrTable"></tbody>
+              </table>
+            </div>
+          </div>
+            <div class="export-bar">
+              <button class="btn export-btn" type="button" id="openExportModalBtn">Export ↗</button>
+            </div>
+
+            <!-- export user data into a csv or notes page-->
+            <div id="exportModal" class="export-modal" style="display:none;">
+              <div class="export-modal-card">
+                <h3>Export patient data</h3>
+
+                <label for="exportFormat"><strong>Format</strong></label>
+                <select id="exportFormat" class="search">
+                  <option value="csv">CSV</option>
+                  <option value="notes">Notes</option>
+                </select>
+
+                <label for="exportMetric" style="margin-top:12px; display:block;"><strong>What to export</strong></label>
+                <select id="exportMetric" class="search">
+                  <option value="all">All biomarkers</option>
+                  <option value="glucose">Glucose</option>
+                  <option value="bp">Blood Pressure</option>
+                  <option value="hr">Heart Rate</option>
+                </select>
+
+                <label for="exportRange" style="margin-top:12px; display:block;"><strong>Time range</strong></label>
+                <select id="exportRange" class="search">
+                  <option value="7">Last 7 days</option>
+                  <option value="30">Last 30 days</option>
+                  <option value="365">Last 1 year</option>
+                  <option value="all">All time</option>
+                </select>
+
+                <div class="inline" style="margin-top:16px;">
+                  <button class="btn primary" type="button" id="downloadExportBtn">Download</button>
+                  <button class="btn" type="button" id="cancelExportBtn">Cancel</button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/doctor_dashboard.js"></script>
+</body>
+</html>

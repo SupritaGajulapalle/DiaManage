@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diamanage — Sign Up</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <style>
+    /* Auth page layout */
+    .auth-wrapper {
+      min-height: calc(100vh - 65px);
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+    }
+
+    .auth-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .auth-logo img { height: 44px; width: auto; }
+
+    .auth-card h1 {
+      margin: 0 0 6px;
+      font-size: 1.55rem;
+      text-align: center;
+    }
+
+    .auth-card .auth-sub {
+      margin: 0 0 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .auth-field {
+      margin-bottom: 16px;
+    }
+
+    .auth-field label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+    }
+
+    .auth-field input {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.95);
+      font-size: 0.97rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .auth-field input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(31,127,191,0.10);
+    }
+
+    .auth-field input.invalid {
+      border-color: #dc2626;
+    }
+
+    .field-hint {
+      margin: 5px 0 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .auth-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 13px;
+      border-radius: 14px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      box-shadow: 0 10px 25px rgba(31,127,191,0.20);
+      transition: filter 0.15s;
+    }
+
+    .auth-btn:hover { filter: brightness(1.04); }
+    .auth-btn:disabled { opacity: 0.6; cursor: not-allowed; filter: none; }
+
+    .auth-msg {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .auth-msg.error {
+      background: rgba(220,38,38,0.08);
+      border: 1px solid rgba(220,38,38,0.20);
+      color: #dc2626;
+    }
+
+    .auth-msg.success {
+      background: rgba(87,179,60,0.10);
+      border: 1px solid rgba(87,179,60,0.25);
+      color: #2d7a16;
+    }
+
+    .auth-links {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .auth-links a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* Password strength bar */
+    .strength-bar {
+      margin-top: 6px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .strength-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.25s, background 0.25s;
+    }
+
+    .strength-label {
+      font-size: 0.78rem;
+      margin-top: 4px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a class="brand" href="index.html" aria-label="Diamanage home">
+      <img src="../assets/logo.png" alt="Diamanage logo" class="brand-logo" />
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="login.html" class="nav-link">Log in</a>
+        <a href="register.html" class="nav-link active nav-cta">Sign up</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Auth -->
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <img src="../assets/logo.png" alt="Diamanage" />
+      </div>
+
+      <h1>Create an account</h1>
+      <p class="auth-sub">Join Diamanage to start managing your diabetes</p>
+
+      <form id="registerForm" novalidate>
+        <div class="auth-field">
+          <label for="name">Full name</label>
+          <input id="name" type="text" placeholder="Jane Smith" autocomplete="name" required />
+        </div>
+
+        <div class="auth-field">
+          <label for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" required />
+          <div class="strength-bar"><div class="strength-bar-fill" id="strengthFill"></div></div>
+          <div class="strength-label" id="strengthLabel"></div>
+        </div>
+
+        <div class="auth-field">
+          <label for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" type="password" placeholder="Repeat your password" autocomplete="new-password" required />
+        </div>
+
+        <button class="auth-btn" type="submit" id="submitBtn">Create account</button>
+
+        <div class="auth-msg" id="authMsg"></div>
+      </form>
+
+      <div class="auth-links">
+        Already have an account? <a href="login.html">Log in</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Hamburger
+    document.getElementById('hamburger').addEventListener('click', function () {
+      const menu = document.getElementById('navMenu');
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('open');
+    });
+
+    // Password strength
+    const passwordInput  = document.getElementById('password');
+    const strengthFill   = document.getElementById('strengthFill');
+    const strengthLabel  = document.getElementById('strengthLabel');
+
+    const levels = [
+      { color: '#dc2626', label: 'Weak',      min: 1  },
+      { color: '#f97316', label: 'Fair',      min: 3  },
+      { color: '#eab308', label: 'Good',      min: 5  },
+      { color: '#57b33c', label: 'Strong',    min: 7  },
+    ];
+
+    function scorePassword(pw) {
+      let score = 0;
+      if (pw.length >= 8)  score++;
+      if (pw.length >= 12) score++;
+      if (/[A-Z]/.test(pw)) score++;
+      if (/[a-z]/.test(pw)) score++;
+      if (/[0-9]/.test(pw)) score++;
+      if (/[^A-Za-z0-9]/.test(pw)) score += 2;
+      return score; // 0-7
+    }
+
+    passwordInput.addEventListener('input', function () {
+      const score = scorePassword(this.value);
+      if (!this.value) {
+        strengthFill.style.width = '0%';
+        strengthLabel.textContent = '';
+        return;
+      }
+      const pct   = Math.min(100, Math.round((score / 7) * 100));
+      const level = levels.slice().reverse().find(l => score >= l.min) || levels[0];
+      strengthFill.style.width      = pct + '%';
+      strengthFill.style.background = level.color;
+      strengthLabel.textContent     = level.label;
+      strengthLabel.style.color     = level.color;
+    });
+
+    // Form submit
+    const form      = document.getElementById('registerForm');
+    const msgEl     = document.getElementById('authMsg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showMsg(text, type) {
+      msgEl.textContent = text;
+      msgEl.className   = 'auth-msg ' + type;
+      msgEl.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      msgEl.style.display = 'none';
+
+      const name            = document.getElementById('name').value.trim();
+      const email           = document.getElementById('email').value.trim();
+      const password        = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (!name || !email || !password || !confirmPassword) {
+        showMsg('Please fill in all fields.', 'error');
+        return;
+      }
+
+      if (password.length < 8) {
+        showMsg('Password must be at least 8 characters.', 'error');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showMsg('Passwords do not match.', 'error');
+        document.getElementById('confirmPassword').classList.add('invalid');
+        return;
+      }
+
+      document.getElementById('confirmPassword').classList.remove('invalid');
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Creating account…';
+
+      try {
+        const res  = await fetch('http://localhost:8080/api/user/register', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ name, email, password, role: 'PATIENT' })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showMsg('Account created! Redirecting to login…', 'success');
+          setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+        } else {
+          showMsg(data.message || 'Registration failed. Please try again.', 'error');
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Create account';
+        }
+      } catch (err) {
+        showMsg('Could not reach the server. Please try again.', 'error');
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Create account';
+      }
+    });
+  </script>
+</body>
+</html>

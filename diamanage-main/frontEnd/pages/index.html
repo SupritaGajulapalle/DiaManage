@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diamanage</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+  <!-- Header / Nav -->
+  <header class="header">
+    <a class="brand" href="index.html" aria-label="Diamanage home">
+      <img src="../assets/logo.png" alt="Diamanage logo" class="brand-logo" />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="login.html" class="nav-link">Log in</a>
+        <a href="register.html" class="nav-link nav-cta">Sign up</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="pill">Diabetes Management Platform</p>
+        <h1>Track your health. Stay on top of diabetes.</h1>
+        <p class="subhead">
+          Log important biomarkers, stay consistent with daily tasks and keep your health data organised.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="register.html">Get started</a>
+          <a class="btn ghost" href="#">Learn more</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">✔</div>
+            <div class="stat-text">Daily task checklists</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">📈</div>
+            <div class="stat-text">Biomarker trends & charts</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">🔒</div>
+            <div class="stat-text">Secure  data</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h2 class="card-title">Weekly Overview</h2>
+
+        <!-- Simple slideshow (3 slides) -->
+        <div class="slider" aria-label="Highlights">
+          <div class="slides" id="slides">
+            <div class="slide">
+              <div class="mini-card">
+                <h3>Glucose trend</h3>
+                <p>See patterns across the week at a glance.</p>
+                <div class="fake-bar">
+                  <span style="width: 72%"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="mini-card">
+                <h3>Task completion</h3>
+                <p>Keep daily actions consistent and visible.</p>
+                <ul class="mini-list">
+                  <li><span class="dot ok"></span> Log glucose</li>
+                  <li><span class="dot ok"></span> Take medication</li>
+                  <li><span class="dot warn"></span> 20 min walk</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="mini-card">
+                <h3>Doctor view</h3>
+                <p>Assign tasks and compare history over time.</p>
+                <div class="fake-grid">
+                  <div class="chip">BP</div>
+                  <div class="chip">HbA1c</div>
+                  <div class="chip">Weight</div>
+                  <div class="chip">Notes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-controls">
+            <button class="icon-btn" id="prevBtn" aria-label="Previous slide">‹</button>
+            <div class="dots" id="dots" aria-label="Slide dots"></div>
+            <button class="icon-btn" id="nextBtn" aria-label="Next slide">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+      <div class="section-head">
+        <h2>What Diamanage does</h2>
+        <p>Everything you need for simple, structured diabetes management.</p>
+      </div>
+
+      <div class="grid">
+        <article class="feature">
+          <h3>Patient checklist</h3>
+          <p>Daily tasks that are easy to complete and track—so nothing gets missed.</p>
+        </article>
+
+        <article class="feature">
+          <h3>Biomarker logging</h3>
+          <p>Record readings like glucose, weight, blood pressure, and view them over time.</p>
+        </article>
+
+        <article class="feature">
+          <h3>GP - supported care</h3>
+          <p>If you join through your GP, doctors can review biomarker trends and assign care tasks.</p>
+        </article>
+
+        <article class="feature">
+          <h3>Secure accounts</h3>
+          <p>Role-based access for patients and clinicians, designed for privacy and safety.</p>
+        </article>
+      </div>
+    </section>
+<br>
+    <!-- How it works -->
+    <section class="section alt">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p>A simple flow from sign up to daily care.</p>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div>
+            <h3>Create an account</h3>
+            <p>Sign up as a patient to access your dashboard.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div>
+            <h3>Log tasks & biomarkers</h3>
+            <p>Patients complete daily tasks and record readings.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div>
+            <h3>Review & adjust</h3>
+            <p>Monitor your progress and tailor your care plan based on trends.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="cta">
+        <h3>Ready to try Diamanage?</h3>
+        <p></p>
+        <a class="btn primary" href="register.html">Create an account</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-name">Diamanage</div>
+        <p>Diabetes management made simpler for patients and clinicians.</p>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h4>Product</h4>
+          <a href="#">About</a>
+          <a href="#">Log in</a>
+          <a href="#">Sign up</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#">Help</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+        <div>
+          <h4>Social</h4>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="X">X</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Diamanage</span>
+      <span class="muted">University project demo</span>
+    </div>
+  </footer>
+
+  
+  <script>
+    // ----- Footer year -----
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// ----- Mobile nav -----
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+  const isOpen = navMenu.classList.toggle("open");
+  hamburger.setAttribute("aria-expanded", String(isOpen));
+});
+
+// Close menu when clicking a link (mobile)
+navMenu.addEventListener("click", (e) => {
+  if (e.target.classList.contains("nav-link")) {
+    navMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+  }
+});
+
+// ----- Simple slider -----
+const slidesEl = document.getElementById("slides");
+const dotsEl = document.getElementById("dots");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const totalSlides = slidesEl.children.length;
+let current = 0;
+
+function renderDots() {
+  dotsEl.innerHTML = "";
+  for (let i = 0; i < totalSlides; i++) {
+    const b = document.createElement("button");
+    b.className = "dot-btn" + (i === current ? " active" : "");
+    b.setAttribute("aria-label", `Go to slide ${i + 1}`);
+    b.addEventListener("click", () => goTo(i));
+    dotsEl.appendChild(b);
+  }
+}
+
+function goTo(idx) {
+  current = (idx + totalSlides) % totalSlides;
+  slidesEl.style.transform = `translateX(-${current * 100}%)`;
+  renderDots();
+}
+
+prevBtn.addEventListener("click", () => goTo(current - 1));
+nextBtn.addEventListener("click", () => goTo(current + 1));
+
+renderDots();
+goTo(0);
+
+// Auto-advance (optional)
+setInterval(() => goTo(current + 1), 6000);
+  </script>
+  </body>
+</html>
