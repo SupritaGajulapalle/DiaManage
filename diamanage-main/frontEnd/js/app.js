@@ -15,8 +15,8 @@ import {
   initGoalForm
 } from "./ui.js";
  
-const API_BASE = "http://localhost:8080/api";
- 
+const API_BASE = "https://diamanage.onrender.com/api"; 
+
 const userId   = sessionStorage.getItem("userId");
 const userName = sessionStorage.getItem("userName");
 const userRole = sessionStorage.getItem("userRole");
