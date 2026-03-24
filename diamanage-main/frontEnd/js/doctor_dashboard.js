@@ -1,5 +1,5 @@
 //VARIABLES
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://diamanage.onrender.com/api";
 
 const doctorId = sessionStorage.getItem("userId");
 const doctorName = sessionStorage.getItem("userName");
