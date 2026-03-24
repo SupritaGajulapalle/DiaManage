@@ -309,7 +309,7 @@
       submitBtn.textContent = 'Creating account…';
 
       try {
-        const res  = await fetch('http://localhost:8080/api/user/register', {
+        const res  = await fetch('https://diamanage.onrender.com/api', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ name, email, password, role: 'PATIENT' })
